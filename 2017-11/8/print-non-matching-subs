@@ -1,0 +1,7 @@
+#! /bin/bash
+
+while read p; do
+  if [[ $(rgrep -i $p "./file-to-check-pattern-against") == "" ]]; then
+    echo $p
+  fi
+done
