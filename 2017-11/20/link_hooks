@@ -1,0 +1,13 @@
+#! /bin/bash
+
+linkFiles () {
+    ln -f ./git_hooks/$1 ./.git/hooks/$1
+    chmod +x .git/hooks/$1
+}
+
+export -f linkFiles
+
+# Create the sym links in subshell where it can error out as needed
+find ./git_hooks/ -type f -exec bash -c 'linkFiles $(basename {})' \;
+
+echo "Done linking hooks to .git/hooks."
